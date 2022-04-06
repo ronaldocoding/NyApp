@@ -2,6 +2,7 @@ package com.example.nyapp.books
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.nyapp.R
 import com.example.nyapp.databinding.ActivityBooksBinding
 
 class BooksActivity : AppCompatActivity() {
@@ -14,7 +15,7 @@ class BooksActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.toolbarMain.title = "Books"
+        binding.toolbarMain.title = getString(R.string.books_title)
         setSupportActionBar(binding.toolbarMain)
     }
 }
