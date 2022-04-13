@@ -2,22 +2,43 @@ package com.example.nyapp.books
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.nyapp.data.ApiService
 import com.example.nyapp.data.model.Book
+import com.example.nyapp.data.response.BookBodyResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class BooksViewModel : ViewModel() {
 
     val booksLiveData: MutableLiveData<List<Book>> = MutableLiveData()
 
     fun getBooks() {
-        booksLiveData.value = createFakeBooks()
-    }
+        ApiService.service.getBooks().enqueue(object: Callback<BookBodyResponse> {
 
-    private fun createFakeBooks(): List<Book> {
-        return listOf(
-            Book("Title 1", "Author 1"),
-            Book("Title 2", "Author 2"),
-            Book("Title 3", "Author 3"),
-            Book("Title 4", "Author 4")
-        )
+            override fun onResponse(
+                call: Call<BookBodyResponse>,
+                response: Response<BookBodyResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val books: MutableList<Book> = mutableListOf()
+
+                    response.body()?.let { bookBodyResponse ->
+                        for (result in bookBodyResponse.booksResult) {
+                            val book = Book(
+                                title = result.bookDetailsResponse[0].title,
+                                author = result.bookDetailsResponse[0].author
+                            )
+                            books.add(book)
+                        }
+                    }
+                    booksLiveData.value = books
+                }
+            }
+
+            override fun onFailure(call: Call<BookBodyResponse>, t: Throwable) {
+            }
+
+        })
     }
 }
