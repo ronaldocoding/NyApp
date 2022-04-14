@@ -1,4 +1,4 @@
-package com.example.nyapp.books
+package com.example.nyapp.presentation.books
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,7 +27,8 @@ class BooksViewModel : ViewModel() {
                         for (result in bookBodyResponse.booksResult) {
                             val book = Book(
                                 title = result.bookDetailsResponse[0].title,
-                                author = result.bookDetailsResponse[0].author
+                                author = result.bookDetailsResponse[0].author,
+                                description = result.bookDetailsResponse[0].description
                             )
                             books.add(book)
                         }

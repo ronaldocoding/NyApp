@@ -1,4 +1,4 @@
-package com.example.nyapp.books
+package com.example.nyapp.presentation.books
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nyapp.R
 import com.example.nyapp.databinding.ActivityBooksBinding
+import com.example.nyapp.presentation.details.BookDetailsActivity
 
 class BooksActivity : AppCompatActivity() {
 
@@ -28,7 +29,10 @@ class BooksActivity : AppCompatActivity() {
                     layoutManager =
                         LinearLayoutManager(this@BooksActivity, RecyclerView.VERTICAL, false)
                     setHasFixedSize(true)
-                    adapter = BooksAdapter(books)
+                    adapter = BooksAdapter(books) { book ->
+                        val intent = BookDetailsActivity.getStartIntent(this@BooksActivity, book.title, book.description)
+                        this@BooksActivity.startActivity(intent)
+                    }
                 }
             }
         }
