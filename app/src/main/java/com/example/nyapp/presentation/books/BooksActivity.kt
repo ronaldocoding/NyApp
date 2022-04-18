@@ -6,23 +6,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nyapp.R
 import com.example.nyapp.databinding.ActivityBooksBinding
-import com.example.nyapp.databinding.IncludeToolbarBinding
 import com.example.nyapp.presentation.base.BaseActivity
 import com.example.nyapp.presentation.details.BookDetailsActivity
 
 class BooksActivity : BaseActivity() {
 
     private lateinit var booksBinding: ActivityBooksBinding
-    private lateinit var toolbarBinding: IncludeToolbarBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         booksBinding = ActivityBooksBinding.inflate(layoutInflater)
-        toolbarBinding = IncludeToolbarBinding.inflate(layoutInflater)
         val view = booksBinding.root
         setContentView(view)
 
-        setupToolbar(toolbarBinding.toolbarMain, R.string.books_title)
+        setupToolbar(findViewById(R.id.toolbarMain), R.string.books_title)
 
         val viewModel = ViewModelProvider(this).get(BooksViewModel::class.java)
         viewModel.booksLiveData.observe(this) {

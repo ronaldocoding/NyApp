@@ -5,22 +5,19 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.nyapp.R
 import com.example.nyapp.databinding.ActivityBookDetailsBinding
-import com.example.nyapp.databinding.IncludeToolbarBinding
 import com.example.nyapp.presentation.base.BaseActivity
 
 class BookDetailsActivity : BaseActivity() {
 
     private lateinit var binding: ActivityBookDetailsBinding
-    private lateinit var toolbarBinding: IncludeToolbarBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBookDetailsBinding.inflate(layoutInflater)
-        toolbarBinding = IncludeToolbarBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        setupToolbar(toolbarBinding.toolbarMain, R.string.book_details_title)
+        setupToolbar(findViewById(R.id.toolbarMain), R.string.book_details_title)
 
         val title = intent.getStringExtra(EXTRA_TITLE)
         val description = intent.getStringExtra(EXTRA_DESCRIPTION)
