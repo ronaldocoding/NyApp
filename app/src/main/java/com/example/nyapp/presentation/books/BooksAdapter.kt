@@ -10,7 +10,7 @@ import com.example.nyapp.data.model.Book
 
 class BooksAdapter(
     private val books: List<Book>,
-    val onItemClickListener: ((book: Book) -> Unit)
+    private val onItemClickListener: ((book: Book) -> Unit)
 ) : RecyclerView.Adapter<BooksAdapter.BooksViewHolder>() {
 
 
