@@ -29,11 +29,7 @@ class BooksViewModel : ViewModel() {
 
                         response.body()?.let { bookBodyResponse ->
                             for (result in bookBodyResponse.booksResult) {
-                                val book = Book(
-                                    title = result.bookDetailsResponse[0].title,
-                                    author = result.bookDetailsResponse[0].author,
-                                    description = result.bookDetailsResponse[0].description
-                                )
+                                val book = result.bookDetailsResponse[0].getBookModel()
                                 books.add(book)
                             }
                         }
